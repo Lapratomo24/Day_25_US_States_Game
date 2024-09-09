@@ -15,6 +15,18 @@ while len(all_states) < 50:
 
     user_answer = screen.textinput(title=f"{len(all_states)}/50 Guess the state", prompt="Type in the name of the state").title()
 
+    if user_answer == "Exit":
+
+        missing_states_list = []
+
+        for state in states:
+            if state not in all_states:
+                missing_states_list.append(state)
+                missing_states_csv = pandas.DataFrame(missing_states_list)
+                missing_states_csv.to_csv("missing_states.csv")
+
+        break
+
     if user_answer in states:
         all_states.append(user_answer)
         # display state name after correct guess
@@ -28,4 +40,3 @@ while len(all_states) < 50:
         state.write(user_answer)
 
 
-screen.exitonclick()
