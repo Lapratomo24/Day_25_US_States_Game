@@ -9,23 +9,23 @@ turtle.shape(image)
 data = pandas.read_csv("50_states.csv")
 states = data["state"].to_list()
 
-all_states_guessed = False
+all_states = []
 
-while not all_states_guessed:
+while len(all_states) < 50:
 
-    user_answer = screen.textinput(title="Guess the state", prompt="Type in the name of the state").title()
+    user_answer = screen.textinput(title=f"{len(all_states)}/50 Guess the state", prompt="Type in the name of the state").title()
 
     if user_answer in states:
-        state_data = data[data["state"] == user_answer]
-        x_cor = int(state_data["x"])
-        y_cor = int(state_data["y"])
-
+        all_states.append(user_answer)
         # display state name after correct guess
         state = turtle.Turtle()
         state.hideturtle()
         state.penup()
+        state_data = data[data["state"] == user_answer]
+        x_cor = state_data["x"].item()
+        y_cor = state_data["y"].item()
         state.goto(x_cor, y_cor)
-        state.write(user_answer, font=("Arial", 8, "normal"))
+        state.write(user_answer)
 
-        # remove state after correct guess
-        states.remove(user_answer)
+
+screen.exitonclick()
