@@ -17,13 +17,17 @@ while len(all_states) < 50:
 
     if user_answer == "Exit":
 
-        missing_states_list = []
+        # missing_states_list = []
 
-        for state in states:
-            if state not in all_states:
-                missing_states_list.append(state)
-                missing_states_csv = pandas.DataFrame(missing_states_list)
-                missing_states_csv.to_csv("missing_states.csv")
+        # for state in states:
+        #    if state not in all_states:
+        #        missing_states_list.append(state)
+        #    missing_states_csv = pandas.DataFrame(missing_states_list)
+        #    missing_states_csv.to_csv("missing_states.csv")
+
+        missing_states_list = [state for state in states if state not in all_states]
+        missing_states_csv = pandas.DataFrame(missing_states_list)
+        missing_states_csv.to_csv("missing_states.csv")
 
         break
 
